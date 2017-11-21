@@ -25,7 +25,6 @@ public class OptionalType {
         System.out.println("emptyOptional isPresent: " + emptyOptional.orElse("b"));
         System.out.println("alsoEmpty isPresent: " + alsoEmpty.orElseGet(() -> "c")); //better performance
 
-
-
     }
 }
+
