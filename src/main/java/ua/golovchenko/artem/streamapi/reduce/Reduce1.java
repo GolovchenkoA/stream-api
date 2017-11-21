@@ -1,5 +1,7 @@
 package ua.golovchenko.artem.streamapi.reduce;
 
+import ua.golovchenko.artem.model.Product;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +40,29 @@ public class Reduce1 {
 
         //reduce with list of strings
         List<String> wordsList2 = Arrays.asList("this", "is", "java", "stream");
-        String result2 = wordsList.stream().reduce("Result: ",(x, y) -> x + " " + y);
+        String result2 = wordsList.stream().reduce("Result: ", (x, y) -> x + " " + y);
         System.out.println(result2); // Result: this is java stream
+
+
+         /*
+           Form 3: U reduce(U identity, BiFunction<U,? super T,U> accumulator, BinaryOperator<U> combiner)
+        */
+
+         // Summarize products with a price less than 3000
+         Stream<Product> productStream = Stream.of(new Product("Product 1", 1500),
+                                                   new Product("Product 2", 2500),
+                                                   new Product("Product 3", 3000));
+
+         int result3 = productStream.reduce(0,
+                 (sum,item) ->{
+                    if(item.getPrice()< 3000)
+                        return sum + item.getPrice();
+                    else
+                        return sum + 0;
+         },
+                 (x,y) -> x + y);
+
+        System.out.println("sum: " + result3);
     }
 }
+
