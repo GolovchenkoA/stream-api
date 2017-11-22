@@ -35,7 +35,7 @@ public class Ordered {
                 .collect(toList());
 
         //assertEquals(asList(2, 3, 4, 5), stillOrdered);
-        
+
         Set<Integer> unordered = new HashSet<>(numbers2);
         List<Integer> stillUnordered = unordered.stream()
                 .map(x -> x + 1)
