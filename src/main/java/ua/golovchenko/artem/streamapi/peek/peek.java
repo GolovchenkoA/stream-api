@@ -1,4 +1,4 @@
-package ua.golovchenko.artem.peek;
+package ua.golovchenko.artem.streamapi.peek;
 
 import java.util.List;
 import java.util.stream.Collectors;
