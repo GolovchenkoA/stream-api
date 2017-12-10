@@ -7,6 +7,8 @@ package ua.golovchenko.artem.model;
  */
 public class Product {
 
+    private static final int CHEAP = 50;
+
     private String name;
     private int price;
 
@@ -28,6 +30,10 @@ public class Product {
 
     public int getPrice() {
         return price;
+    }
+
+    public boolean isCheap(){
+        return getPrice() < CHEAP;
     }
 
     @Override
