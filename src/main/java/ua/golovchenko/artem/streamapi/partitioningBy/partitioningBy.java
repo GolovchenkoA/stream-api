@@ -23,7 +23,9 @@ public class partitioningBy {
     private  static List<Product> products = Arrays.asList(
             new Product("P1", 49),
             new Product("P2", 120),
-            new Product("P3", 150));
+            new Product("P3", 150, "Owner1"),
+            new Product("P3", 150, "Owner2"),
+            new Product("P3", 150, "Owner2"));
 
     public static void main(String[] args) {
 
@@ -36,10 +38,42 @@ public class partitioningBy {
 
         // partition of Product by Price
         System.out.println(expensiveAndCheap(products.stream()));
+
+        // Grouping products by owner
+        System.out.println(groupByOwner(products.stream()));
+
+        // Grouping products by owner (with replace blank owner field). Map
+        System.out.println(groupByOwnerWithMap(products.stream()));
+
+                // Grouping products by owner (with replace blank owner field). Peek
+        System.out.println(groupByOwnerWithPeek(products.stream()));
+
     }
 
-
+    // Private methods
     private static Map<Boolean, List<Product>> expensiveAndCheap(Stream<Product> products){
         return products.collect(Collectors.partitioningBy(Product::isCheap));
     }
+
+    private static Map<String, List<Product>> groupByOwner(Stream<Product> products){
+        return products.collect(Collectors.groupingBy(Product::getOwner));
+    }
+
+    private static Map<String, List<Product>> groupByOwnerWithMap(Stream<Product> products){
+        return products.map(p -> {
+            if (p.getOwner().isEmpty()) {
+                p.setOwner("No owner");
+            }
+            return p;
+        }).collect((Collectors.groupingBy(Product::getOwner)));
+    }
+
+    private static Map<String, List<Product>> groupByOwnerWithPeek(Stream<Product> products){
+        return products.peek(p -> {
+            if (p.getOwner().isEmpty()) {
+                p.setOwner("No owner");
+            }
+        }).collect((Collectors.groupingBy(Product::getOwner)));
+    }
+
 }

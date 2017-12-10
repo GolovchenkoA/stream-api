@@ -11,18 +11,21 @@ public class Product {
 
     private String name;
     private int price;
-
-    public Product(String name, int price){
-        this.name=name;
-        this.price=price;
-    }
+    private String owner;
 
     public Product(String name){
-        this.name=name;
-        this.price = 0;
+        this(name,0);
     }
 
+    public Product(String name, int price){
+        this(name,price, "");
+    }
 
+    public Product(String name, int price, String owner) {
+        this.name = name;
+        this.price = price;
+        this.owner = owner;
+    }
 
     public String getName() {
         return name;
@@ -36,9 +39,17 @@ public class Product {
         return getPrice() < CHEAP;
     }
 
+    public String getOwner() {
+        return owner;
+    }
+
     @Override
     public String toString() {
         return "name: " + name
                 + " price: " + price;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }
